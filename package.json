@@ -1,0 +1,33 @@
+{
+  "name": "pyth-oracles",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@matterlabs/hardhat-zksync-deploy": "^0.6.3",
+    "@matterlabs/hardhat-zksync-solc": "^0.4.0",
+    "@matterlabs/hardhat-zksync-verify": "^0.1.8",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.4",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "zksync-web3": "^0.14.3"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test hardhat test --network zkSyncTestnet",
+    "compile": "yarn hardhat compile",
+    "deploy": "yarn hardhat deploy-zksync --script deploy-feed.ts",
+    "update-feed": "yarn hardhat deploy-zksync --script update-feed.ts"
+  },
+  "dependencies": {
+    "@pythnetwork/pyth-evm-js": "^1.20.1",
+    "@pythnetwork/pyth-sdk-js": "^1.2.0",
+    "@pythnetwork/pyth-sdk-solidity": "^2.2.1"
+  }
+}
