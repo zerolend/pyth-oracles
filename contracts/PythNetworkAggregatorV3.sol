@@ -29,11 +29,11 @@ contract PythNetworkAggregatorV3 {
     }
 
     function description() public pure returns (string memory) {
-        return "";
+        return "An aggregator for pyth network feeds";
     }
 
     function version() public pure returns (uint256) {
-        return 0;
+        return 1;
     }
 
     function latestAnswer() public view returns (int256) {
@@ -47,7 +47,7 @@ contract PythNetworkAggregatorV3 {
     }
 
     function latestRound() public pure returns (uint256) {
-        return 0;
+        return 1;
     }
 
     function getAnswer(uint256) public view returns (int256) {

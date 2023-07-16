@@ -22,6 +22,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
   // Create deployer object and load the artifact of the contract you want to deploy.
   const deployer = new Deployer(hre, wallet);
+  console.log(wallet.address);
   const artifact = await deployer.loadArtifact("PythNetworkAggregatorV3");
 
   const priceIds = [
@@ -30,7 +31,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a", // usdc/usd
   ];
 
-  const index = 0;
+  const index = 2;
 
   // Estimate contract deployment fee
   const args = [

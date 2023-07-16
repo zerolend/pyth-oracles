@@ -28,8 +28,8 @@ const config: HardhatUserConfig = {
       zksync: true,
       chainId: 324,
       // contract verification endpoint
-      // verifyURL:
-      //   "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
+      verifyURL:
+        "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     },
   },
   solidity: {
