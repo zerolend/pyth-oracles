@@ -2,7 +2,7 @@
 
 This repo contains Chainlink interfaces for Pyth network pricefeeds. This allows Chainlink-based dApps to easily access Pyth pricefeeds.
 
-The deployment of the various oracles is detailed here:
+The deployment of the various oracles on zkSync is detailed here:
 
 | Price Feed | Address                                    |
 | ---------- | ------------------------------------------ |
