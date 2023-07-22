@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // load contract artifact. Make sure to compile first!
-import * as ContractArtifact from "../artifacts-zk/contracts/PythNetworkAggregatorV3.sol/PythNetworkAggregatorV3.json";
+import * as ContractArtifact from "../artifacts-zk/contracts/PythAggregatorV3.sol/PythAggregatorV3.json";
 
 const PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY || "";
 
@@ -15,7 +15,7 @@ if (!PRIVATE_KEY)
   throw "⛔️ Private key not detected! Add it to the .env file!";
 
 // Address of the contract on zksync testnet
-const CONTRACT_ADDRESS = "---";
+const CONTRACT_ADDRESS = "0x517F9cd13fE63e698d0466ad854cDba5592eeA73";
 
 if (!CONTRACT_ADDRESS) throw "⛔️ Contract address not provided";
 

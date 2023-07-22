@@ -22,34 +22,23 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
   // Create deployer object and load the artifact of the contract you want to deploy.
   const deployer = new Deployer(hre, wallet);
-  console.log(wallet.address);
-  const artifact = await deployer.loadArtifact("PythAggregatorV3");
 
-  const priceIds = [
-    "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace", // eth/usd
-    "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b", // usdt/usd
-    "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a", // usdc/usd
-  ];
+  const artifact = await deployer.loadArtifact("PythAggregatorV3UniV2LP");
 
-  const index = 2;
+  const usdcPriceFeed =
+    "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a";
+  const usdtPriceFeed =
+    "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b";
 
   // Estimate contract deployment fee
   const args = [
-    "0xf087c864AEccFb6A2Bf1Af6A0382B0d0f6c5D834", // pyth feed from https://docs.pyth.network/documentation/pythnet-price-feeds/evm
-    priceIds[index], // feed id from https://pyth.network/developers/price-feed-ids#pyth-evm-testnet
+    usdcPriceFeed, // bytes32 _priceIdA,
+    usdtPriceFeed, // bytes32 _priceIdB,
+    "0xf087c864AEccFb6A2Bf1Af6A0382B0d0f6c5D834", // address _pyth,
+    "0x5D83C0850570De35eAF5c9D6215BF2e8020f656B", // address _lp
   ];
 
   const deploymentFee = await deployer.estimateDeployFee(artifact, args);
-
-  // ⚠️ OPTIONAL: You can skip this block if your account already has funds in L2
-  // Deposit funds to L2
-  // const depositHandle = await deployer.zkWallet.deposit({
-  //   to: deployer.zkWallet.address,
-  //   token: utils.ETH_ADDRESS,
-  //   amount: deploymentFee.mul(2),
-  // });
-  // // Wait until the deposit is processed on zkSync
-  // await depositHandle.wait();
 
   // Deploy this contract. The returned object will be of a `Contract` type, similarly to ones in `ethers`.
   // `greeting` is an argument for contract constructor.
@@ -71,7 +60,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   if (process.env.NODE_ENV != "test") {
     // Contract MUST be fully qualified name (e.g. path/sourceName:contractName)
     const contractFullyQualifedName =
-      "contracts/PythAggregatorV3.sol:PythAggregatorV3";
+      "contracts/PythAggregatorV3UniV2LP.sol:PythAggregatorV3UniV2LP";
 
     // Verify contract programmatically
     await hre.run("verify:verify", {

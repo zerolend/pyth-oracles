@@ -1,10 +1,10 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
-import "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
+import {PythStructs} from "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
+import {IPyth} from "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
 
-contract PythNetworkAggregatorV3 {
+contract PythAggregatorV3 {
     bytes32 public priceId;
     IPyth public pyth;
 
@@ -25,11 +25,12 @@ contract PythNetworkAggregatorV3 {
     }
 
     function decimals() public view returns (uint8) {
-        return 8;
+        PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
+        return uint8(-1 * int8(price.expo));
     }
 
     function description() public pure returns (string memory) {
-        return "An aggregator for pyth network feeds";
+        return "A port of a chainlink aggregator powered by pyth network feeds";
     }
 
     function version() public pure returns (uint256) {

@@ -26,6 +26,7 @@
     "update-feed": "yarn hardhat deploy-zksync --script update-feed.ts"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.9.2",
     "@pythnetwork/pyth-evm-js": "^1.20.1",
     "@pythnetwork/pyth-sdk-js": "^1.2.0",
     "@pythnetwork/pyth-sdk-solidity": "^2.2.1"
