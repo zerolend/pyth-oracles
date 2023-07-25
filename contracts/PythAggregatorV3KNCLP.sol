@@ -56,13 +56,7 @@ contract PythAggregatorV3KNCLP {
     }
 
     function _fetchPrice() internal view returns (uint) {
-        uint256 totalSupply = lp.totalSupply();
-        (, , uint256 r0, uint256 r1, ) = lp.getTradeInfo();
-        uint256 amplification = lp.ampBps() / 10000;
-
-        uint256 sqrtK = Math.sqrt(r0.mul(r1).div(amplification)).fdiv(
-            totalSupply
-        ); // in 2**112
+        uint256 sqrtK = sqrtK(); // in 2**112
 
         uint256 px0 = getPythResponse112(tokenA, priceIdA); // in 2**112
         uint256 px1 = getPythResponse112(tokenB, priceIdB); // in 2**112
@@ -75,6 +69,15 @@ contract PythAggregatorV3KNCLP {
             .div(2 ** 56);
 
         return answer.mul(1e18).div(2 ** 112);
+    }
+
+    function sqrtK() public view returns (uint256) {
+        uint256 totalSupply = lp.totalSupply();
+
+        (, , uint256 r0, uint256 r1, ) = lp.getTradeInfo();
+        uint256 amp = lp.ampBps() / 10000;
+
+        return Math.sqrt(r0.mul(r1)).div(amp).fdiv(totalSupply);
     }
 
     /// @dev Return token price, multiplied by 2**112
