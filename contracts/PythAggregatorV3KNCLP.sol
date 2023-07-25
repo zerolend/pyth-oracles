@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import {IUniswapV2Pair} from "./interfaces/IUniswapV2Pair.sol";
+import {IKyberSwapClassicPair} from "./interfaces/IKyberSwapClassicPair.sol";
 import {IERC20WithDeciamls} from "./interfaces/IERC20WithDeciamls.sol";
 import {SafeMath} from "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import {Math} from "./Math.sol";
@@ -9,12 +9,12 @@ import {Math} from "./Math.sol";
 import {PythStructs} from "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
 import {IPyth} from "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
 
-contract PythAggregatorV3UniV2LP {
+contract PythAggregatorV3KNCLP {
     using SafeMath for uint256;
     using Math for uint256;
 
     IPyth public pyth;
-    IUniswapV2Pair public lp;
+    IKyberSwapClassicPair public lp;
 
     IERC20WithDeciamls public tokenA;
     IERC20WithDeciamls public tokenB;
@@ -30,7 +30,7 @@ contract PythAggregatorV3UniV2LP {
         address _pyth,
         address _lp
     ) {
-        lp = IUniswapV2Pair(_lp);
+        lp = IKyberSwapClassicPair(_lp);
 
         priceIdA = _priceIdA;
         priceIdB = _priceIdB;
@@ -57,8 +57,12 @@ contract PythAggregatorV3UniV2LP {
 
     function _fetchPrice() internal view returns (uint) {
         uint256 totalSupply = lp.totalSupply();
-        (uint256 r0, uint256 r1) = lp.getReserves();
-        uint256 sqrtK = Math.sqrt(r0.mul(r1)).fdiv(totalSupply); // in 2**112
+        (, , uint256 r0, uint256 r1, ) = lp.getTradeInfo();
+        uint256 amplification = lp.ampBps() / 10000;
+
+        uint256 sqrtK = Math.sqrt(r0.mul(r1).div(amplification)).fdiv(
+            totalSupply
+        ); // in 2**112
 
         uint256 px0 = getPythResponse112(tokenA, priceIdA); // in 2**112
         uint256 px1 = getPythResponse112(tokenB, priceIdB); // in 2**112
