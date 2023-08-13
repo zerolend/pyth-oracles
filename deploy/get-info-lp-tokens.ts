@@ -11,7 +11,7 @@ import * as IERC20WithDeciamlsArtifact from "../artifacts-zk/contracts/interface
 
 // Use this contract to details of a uniswap v2 lp token
 export default async function () {
-  const lpPair = "0x5D83C0850570De35eAF5c9D6215BF2e8020f656B";
+  const lpPair = "0xF6CC0F880150a08695B7913638F12C08e785b032";
   console.log(`Running script to interact with contract ${lpPair}`);
 
   // // @ts-ignore

@@ -34,7 +34,7 @@ function fdiv(lhs: ethers.BigNumber, rhs: ethers.BigNumber) {
 
 // Use this contract to details of a uniswap v2 lp token
 export default async function () {
-  const feedAddr = "0x071Bf614bc2c50140c1f094346774e529571A9Fb";
+  const feedAddr = "0xe6dc86153084039541BfBADd727DCA0E50276cA3";
   console.log(`Running script to interact with contract ${feedAddr}`);
 
   // // @ts-ignore
