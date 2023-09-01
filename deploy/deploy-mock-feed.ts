@@ -26,7 +26,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const artifact = await deployer.loadArtifact("MockAggregator");
 
   // Estimate contract deployment fee
-  const args = ["300"];
+  const args = ["3000"];
 
   const deploymentFee = await deployer.estimateDeployFee(artifact, args);
 

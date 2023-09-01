@@ -1,7 +1,9 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-contract MockAggregator {
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MockAggregator is Ownable {
     int256 private _latestAnswer;
 
     event AnswerUpdated(
@@ -17,6 +19,11 @@ contract MockAggregator {
 
     function latestAnswer() external view returns (int256) {
         return _latestAnswer;
+    }
+
+    function updateAnswer(int256 answer) external onlyOwner {
+        _latestAnswer = answer;
+        emit AnswerUpdated(answer, 0, block.timestamp);
     }
 
     function getTokenType() external pure returns (uint256) {
