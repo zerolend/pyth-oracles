@@ -14,7 +14,7 @@ const config: HardhatUserConfig = {
   },
 
   zksolc: {
-    version: "latest",
+    version: "1.3.13",
     settings: {},
   },
   defaultNetwork: "zkSyncEra",

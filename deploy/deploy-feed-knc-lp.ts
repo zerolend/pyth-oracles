@@ -35,7 +35,8 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     usdcPriceFeed, // bytes32 _priceIdA,
     usdtPriceFeed, // bytes32 _priceIdB,
     "0xf087c864AEccFb6A2Bf1Af6A0382B0d0f6c5D834", // address _pyth,
-    "0x5D83C0850570De35eAF5c9D6215BF2e8020f656B", // address _lp
+    "0x4d321cd88c5680ce4f85bb58c578dfe9c2cc1ef6", // address _lp
+    10,
   ];
 
   const deploymentFee = await deployer.estimateDeployFee(artifact, args);

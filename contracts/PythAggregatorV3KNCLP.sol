@@ -13,22 +13,24 @@ contract PythAggregatorV3KNCLP {
     using SafeMath for uint256;
     using Math for uint256;
 
-    IPyth public pyth;
-    IKyberSwapClassicPair public lp;
+    IPyth public immutable pyth;
+    IKyberSwapClassicPair public immutable lp;
 
-    IERC20WithDeciamls public tokenA;
-    IERC20WithDeciamls public tokenB;
+    IERC20WithDeciamls public immutable tokenA;
+    IERC20WithDeciamls public immutable tokenB;
 
-    bytes32 public priceIdA;
-    bytes32 public priceIdB;
+    bytes32 public immutable priceIdA;
+    bytes32 public immutable priceIdB;
 
     uint256 public constant TARGET_DIGITS = 8;
+    uint256 public immutable roundingDown;
 
     constructor(
         bytes32 _priceIdA,
         bytes32 _priceIdB,
         address _pyth,
-        address _lp
+        address _lp,
+        uint _roundingDown
     ) {
         lp = IKyberSwapClassicPair(_lp);
 
@@ -38,7 +40,7 @@ contract PythAggregatorV3KNCLP {
         tokenA = IERC20WithDeciamls(lp.token0());
         tokenB = IERC20WithDeciamls(lp.token1());
 
-        // TODO: enforce only 8 decimal pyth price feeds
+        roundingDown = _roundingDown;
 
         pyth = IPyth(_pyth);
     }
@@ -68,7 +70,7 @@ contract PythAggregatorV3KNCLP {
             .mul(Math.sqrt(px1))
             .div(2 ** 56);
 
-        return answer.mul(1e18).div(2 ** 112);
+        return answer.mul(1e18).div(2 ** 112) / 10 ** roundingDown;
     }
 
     function sqrtK() public view returns (uint256) {
