@@ -48,7 +48,8 @@ contract PythAggregatorV3 {
     }
 
     function latestRound() public pure returns (uint256) {
-        return 1;
+        // use timestamp as the round id
+        return latestTimestamp();
     }
 
     function getAnswer(uint256) public view returns (int256) {
@@ -86,6 +87,12 @@ contract PythAggregatorV3 {
             uint80 answeredInRound
         )
     {
-        return (0, latestAnswer(), 0, latestTimestamp(), 0);
+        return (
+            latestRound(),
+            latestAnswer(),
+            latestTimestamp(),
+            latestTimestamp(),
+            latestRound()
+        );
     }
 }
