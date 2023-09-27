@@ -47,7 +47,7 @@ contract PythAggregatorV3 {
         return price.publishTime;
     }
 
-    function latestRound() public pure returns (uint256) {
+    function latestRound() public view returns (uint256) {
         // use timestamp as the round id
         return latestTimestamp();
     }
@@ -87,12 +87,14 @@ contract PythAggregatorV3 {
             uint80 answeredInRound
         )
     {
+        PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
+        uint80 rountId = uint80(price.publishTime);
         return (
-            latestRound(),
-            latestAnswer(),
-            latestTimestamp(),
-            latestTimestamp(),
-            latestRound()
+            roundId,
+            int256(price.price),
+            price.publishTime,
+            price.publishTime,
+            roundId
         );
     }
 }
