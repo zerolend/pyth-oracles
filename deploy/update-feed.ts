@@ -43,9 +43,9 @@ export default async function () {
     "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a", // usdc/usd
     "0xc9dc99720306ef43fd301396a6f8522c8be89c6c77e8c27d87966918a943fd20", // lusd/usd
     "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43", // wbtc/usd
-    "0xd69731a2e74ac1ce884fc3890f7ee324b6deb66147055249568869ed700882e4", // pepe/usd
-    "0xa0255134973f4fdf2f8f7808354274a3b1ebc6ee438be898d045e8b56ba1fe13", // reth/usd
-    "0x15ecddd26d49e1a8f1de9376ebebc03916ede873447c1255d2d5891b92ce5717", // cbeth/usd
+    // "0xd69731a2e74ac1ce884fc3890f7ee324b6deb66147055249568869ed700882e4", // pepe/usd
+    // "0xa0255134973f4fdf2f8f7808354274a3b1ebc6ee438be898d045e8b56ba1fe13", // reth/usd
+    // "0x15ecddd26d49e1a8f1de9376ebebc03916ede873447c1255d2d5891b92ce5717", // cbeth/usd
   ];
 
   const data = await pythPriceService.getPriceFeedsUpdateData(priceIds);
