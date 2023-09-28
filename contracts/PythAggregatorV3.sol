@@ -4,6 +4,11 @@ pragma solidity ^0.8.0;
 import {PythStructs} from "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
 import {IPyth} from "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
 
+/**
+ * @title A port of a chainlink aggregator powered by pyth network feeds
+ * @author Deadshot Ryker
+ * @notice This does not store any roundId information on-chain. Please review the code before using this implementation.
+ */
 contract PythAggregatorV3 {
     bytes32 public priceId;
     IPyth public pyth;
@@ -24,7 +29,7 @@ contract PythAggregatorV3 {
         payable(msg.sender).call{value: address(this).balance}("");
     }
 
-    function decimals() public view returns (uint8) {
+    function decimals() public view virtual returns (uint8) {
         PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
         return uint8(-1 * int8(price.expo));
     }
@@ -37,7 +42,7 @@ contract PythAggregatorV3 {
         return 1;
     }
 
-    function latestAnswer() public view returns (int256) {
+    function latestAnswer() public view virtual returns (int256) {
         PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
         return int256(price.price);
     }
@@ -73,7 +78,14 @@ contract PythAggregatorV3 {
             uint80 answeredInRound
         )
     {
-        return (_roundId, latestAnswer(), 0, latestTimestamp(), _roundId);
+        PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
+        return (
+            _roundId,
+            int256(price.price),
+            price.publishTime,
+            price.publishTime,
+            _roundId
+        );
     }
 
     function latestRoundData()
@@ -88,7 +100,7 @@ contract PythAggregatorV3 {
         )
     {
         PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
-        uint80 rountId = uint80(price.publishTime);
+        roundId = uint80(price.publishTime);
         return (
             roundId,
             int256(price.price),
