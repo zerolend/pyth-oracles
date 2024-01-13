@@ -15,7 +15,7 @@ if (!PRIVATE_KEY)
   throw "⛔️ Private key not detected! Add it to the .env file!";
 
 // Address of the contract on zksync testnet
-const CONTRACT_ADDRESS = "0xB142A3Ff253dD16DA659634fF0B776e4b3E8d86C";
+const CONTRACT_ADDRESS = "0xeA1826dD55E34CE9162f0911aBF6E9d3F1E4403c";
 
 if (!CONTRACT_ADDRESS) throw "⛔️ Contract address not provided";
 
@@ -53,7 +53,7 @@ export default async function () {
 
   // // Initialize the provider.
   // // @ts-ignore
-  const provider = new Provider("https://mainnet.era.zksync.io");
+  const provider = new Provider("https://testnet.era.zksync.dev");
   const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
   // Initialize contract instance

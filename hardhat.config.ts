@@ -1,47 +1,32 @@
 import { HardhatUserConfig } from "hardhat/config";
-
-import "@gelatonetwork/web3-functions-sdk/hardhat-plugin";
-
-import "@matterlabs/hardhat-zksync-deploy";
-import "@matterlabs/hardhat-zksync-solc";
-import "@matterlabs/hardhat-zksync-verify";
+import "@nomicfoundation/hardhat-toolbox-viem";
+import dotenv from "dotenv";
+dotenv.config();
 
 const config: HardhatUserConfig = {
-  w3f: {
-    rootDir: "./web3-functions",
-    debug: false,
-    networks: ["zkSyncEra"], //(multiChainProvider) injects provider for these networks
-  },
-
-  zksolc: {
-    version: "1.3.13",
-    settings: {},
-  },
-  defaultNetwork: "zkSyncEra",
+  solidity: "0.8.20",
   networks: {
-    hardhat: {
-      zksync: false,
-    },
-    zkSyncTestnet: {
-      url: "https://zksync2-testnet.zksync.dev",
-      ethNetwork: "goerli",
-      zksync: true,
-      // contract verification endpoint
-      verifyURL:
-        "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
-    },
-    zkSyncEra: {
-      url: "https://mainnet.era.zksync.io",
-      ethNetwork: "mainnet",
-      zksync: true,
-      chainId: 324,
-      // contract verification endpoint
-      verifyURL:
-        "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
+    hardhat: {},
+    manta: {
+      url: "https://pacific-rpc.manta.network/http",
+      accounts: [process.env.WALLET_PRIVATE_KEY || ""],
+      chainId: 169,
     },
   },
-  solidity: {
-    version: "0.8.17",
+  etherscan: {
+    apiKey: {
+      manta: process.env.MANTA_API_KEY || "nothing",
+    },
+    customChains: [
+      {
+        network: "manta",
+        chainId: 169,
+        urls: {
+          apiURL: "https://manta-pacific.l2scan.co/api/contract",
+          browserURL: "https://manta-pacific.l2scan.co",
+        },
+      },
+    ],
   },
 };
 

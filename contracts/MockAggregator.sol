@@ -12,7 +12,7 @@ contract MockAggregator is Ownable {
         uint256 updatedAt
     );
 
-    constructor(int256 initialAnswer) {
+    constructor(int256 initialAnswer) Ownable(msg.sender) {
         _latestAnswer = initialAnswer;
         emit AnswerUpdated(initialAnswer, 0, block.timestamp);
     }
