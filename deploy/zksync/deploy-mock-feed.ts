@@ -15,7 +15,7 @@ if (!PRIVATE_KEY)
 
 // An example of a deploy script that will deploy and call a simple contract.
 export default async function (hre: HardhatRuntimeEnvironment) {
-  console.log(`Running deploy script for the pyth aggregator contract`);
+  console.log(`Running deploy script for the mock pyth aggregator contract`);
 
   // Initialize the wallet.
   const wallet = new Wallet(PRIVATE_KEY);
@@ -26,7 +26,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const artifact = await deployer.loadArtifact("MockAggregator");
 
   // Estimate contract deployment fee
-  const args = ["300"];
+  const args = ["150000000"];
 
   const deploymentFee = await deployer.estimateDeployFee(artifact, args);
 

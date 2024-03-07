@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
   },
 
   zksolc: {
-    version: "1.3.13",
+    version: "latest",
     settings: {},
   },
   defaultNetwork: "zkSyncEra",
@@ -29,17 +29,17 @@ const config: HardhatUserConfig = {
         "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
     },
     zkSyncEra: {
-      url: "https://mainnet.era.zksync.io",
+      url: "https://zksync2-mainnet.zksync.io",
       ethNetwork: "mainnet",
       zksync: true,
-      chainId: 324,
+      // chainId: 324,
       // contract verification endpoint
       verifyURL:
         "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     },
   },
   solidity: {
-    version: "0.8.17",
+    version: "0.8.20",
   },
 };
 

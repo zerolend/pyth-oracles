@@ -12,6 +12,7 @@ export const priceIdsUSD = {
   usdt: "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
   wbtc: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
   wsteth: "0x6df640f3b8963d8f8358f791f352b8364513f6ab1cca5ed3f1f7b5448980e784",
+  manta: "0xc3883bcf1101c111e9fcfe2465703c47f2b638e21fef2cce0502e6c8f416e0e2",
 };
 
 //   MATICX: "----",
@@ -21,4 +22,6 @@ export const priceIdsUSD = {
 export const pythContracts = {
   manta: "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729",
   zksync: "0xf087c864AEccFb6A2Bf1Af6A0382B0d0f6c5D834",
+  blastSepolia: "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729",
+  blast: "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729",
 };

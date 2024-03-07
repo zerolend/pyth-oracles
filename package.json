@@ -12,29 +12,35 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.1",
-    "@pythnetwork/pyth-evm-js": "^1.29.3",
-    "@pythnetwork/pyth-sdk-solidity": "^2.3.0",
-    "dotenv": "^16.3.1",
-    "hardhat": "^2.19.4"
-  },
   "devDependencies": {
     "@gelatonetwork/automate-sdk": "^2.14.0",
     "@gelatonetwork/web3-functions-sdk": "^2.1.3",
+    "@matterlabs/hardhat-zksync-deploy": "^1.1.2",
+    "@matterlabs/hardhat-zksync-verify": "^1.3.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
-    "@nomicfoundation/hardhat-viem": "^1.0.0",
+    "@nomicfoundation/hardhat-viem": "^2.0.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@pythnetwork/pyth-evm-js": "^1.29.3",
+    "@pythnetwork/pyth-sdk-solidity": "^2.3.0",
     "@types/chai": "^4.2.0",
     "@types/chai-as-promised": "^7.1.6",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.0",
     "chai": "^4.2.0",
+    "dotenv": "^16.3.1",
+    "ethers": "^5.7.0",
+    "hardhat": "^2.20.1",
     "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.8.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.0.4",
-    "viem": "^1.15.1"
+    "viem": "^2.7.16",
+    "zksync-ethers": "^6.3.0",
+    "zksync-web3": "^0.17.1"
+  },
+  "dependencies": {
+    "cron": "^3.1.6"
   }
 }
