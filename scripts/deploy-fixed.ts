@@ -1,21 +1,16 @@
 import hre from "hardhat";
-import { priceIdsUSD, pythContracts } from "../utils/constants";
-import { blastChain } from "./chains";
 
 async function main() {
-  const args = [pythContracts.linea, priceIdsUSD.usdt];
+  const args = [1e8];
 
-  // const client = await hre.viem.getPublicClient({
-  //   chain: blastChain,
-  // });
-  const contract = await hre.viem.deployContract("PythAggregatorV3", args);
+  const contract = await hre.viem.deployContract("FixedAggregator", args);
   console.log(`deployed to`, contract.address);
 
   // verify contract for tesnet & mainnet
   if (process.env.NODE_ENV != "test") {
     // Verify contract programmatically
     await hre.run("verify:verify", {
-      address: contract.address,
+      address: "0x458ad5b487f4442245e4c5ea7249009e607a5583",
       constructorArguments: args,
     });
   } else {

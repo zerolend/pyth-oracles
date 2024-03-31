@@ -33,7 +33,7 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
 
   // Get Pyth price data
   const connection = new EvmPriceServiceConnection(
-    "https://hermes.pyth.network" // https://docs.pyth.network/documentation/pythnet-price-feeds/price-service
+    "https://hermes.pyth.network"
   );
 
   const check = (await connection.getLatestPriceFeeds(priceIds)) as any[];

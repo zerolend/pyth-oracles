@@ -5,7 +5,7 @@ import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 
 // load env file
 import dotenv from "dotenv";
-import { priceIdsUSD, pythContracts } from "../constants";
+import { priceIdsUSD, pythContracts } from "../../utils/constants";
 dotenv.config();
 
 // load wallet private key from env file
@@ -29,7 +29,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   // Estimate contract deployment fee
   const args = [
     pythContracts.zksync, // pyth feed from https://docs.pyth.network/documentation/pythnet-price-feeds/evm
-    priceIdsUSD.eth, // feed id from https://pyth.network/developers/price-feed-ids#pyth-evm-testnet
+    priceIdsUSD.wsteth, // feed id from https://pyth.network/developers/price-feed-ids#pyth-evm-testnet
   ];
 
   const deploymentFee = await deployer.estimateDeployFee(artifact, args);

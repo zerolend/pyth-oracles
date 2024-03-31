@@ -15,7 +15,7 @@ if (!PRIVATE_KEY)
   throw "⛔️ Private key not detected! Add it to the .env file!";
 
 // Address of the contract on zksync testnet
-const CONTRACT_ADDRESS = "0xeA1826dD55E34CE9162f0911aBF6E9d3F1E4403c";
+const CONTRACT_ADDRESS = "0xB2c44d16cA0540Cf9104FdbCaD1FD34F9723c836";
 
 if (!CONTRACT_ADDRESS) throw "⛔️ Contract address not provided";
 
@@ -43,9 +43,7 @@ export default async function () {
     "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a", // usdc/usd
     "0xc9dc99720306ef43fd301396a6f8522c8be89c6c77e8c27d87966918a943fd20", // lusd/usd
     "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43", // wbtc/usd
-    // "0xd69731a2e74ac1ce884fc3890f7ee324b6deb66147055249568869ed700882e4", // pepe/usd
-    // "0xa0255134973f4fdf2f8f7808354274a3b1ebc6ee438be898d045e8b56ba1fe13", // reth/usd
-    // "0x15ecddd26d49e1a8f1de9376ebebc03916ede873447c1255d2d5891b92ce5717", // cbeth/usd
+    "0x2356af9529a1064d41e32d617e2ce1dca5733afa901daba9e2b68dee5d53ecf9", // cake/usd
   ];
 
   const data = await pythPriceService.getPriceFeedsUpdateData(priceIds);
@@ -53,7 +51,7 @@ export default async function () {
 
   // // Initialize the provider.
   // // @ts-ignore
-  const provider = new Provider("https://testnet.era.zksync.dev");
+  const provider = new Provider("https://era.zksync.dev");
   const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
   // Initialize contract instance

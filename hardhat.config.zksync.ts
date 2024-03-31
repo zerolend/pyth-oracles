@@ -1,16 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
-import "@gelatonetwork/web3-functions-sdk/hardhat-plugin";
-import "@matterlabs/hardhat-zksync-deploy";
-import "@matterlabs/hardhat-zksync-solc";
-import "@matterlabs/hardhat-zksync-verify";
+import "@matterlabs/hardhat-zksync-toolbox";
 
 const config: HardhatUserConfig = {
-  w3f: {
-    rootDir: "./web3-functions",
-    debug: false,
-    networks: ["zkSyncEra"], //(multiChainProvider) injects provider for these networks
-  },
-
   zksolc: {
     version: "latest",
     settings: {},

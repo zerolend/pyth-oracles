@@ -1,11 +1,11 @@
 import hre from "hardhat";
-import { priceIdsUSD } from "../utils/constants";
+import { priceIdsUSD, pythContracts } from "../utils/constants";
 import { EvmPriceServiceConnection } from "@pythnetwork/pyth-evm-js";
 
 async function main() {
   const contract = await hre.viem.getContractAt(
     "PythAggregatorV3",
-    "0x0Bd27617E20F09a8E7FFdaE281E383b4b2f7A742"
+    "0x517F9cd13fE63e698d0466ad854cDba5592eeA73"
   );
 
   const updateData = [
@@ -14,9 +14,10 @@ async function main() {
     priceIdsUSD.usdt,
     priceIdsUSD.wbtc,
     priceIdsUSD.wsteth,
-    priceIdsUSD.tia,
-    priceIdsUSD.manta,
+    priceIdsUSD.cake,
   ];
+
+  console.log(JSON.stringify(updateData));
 
   const connection = new EvmPriceServiceConnection(
     "https://hermes.pyth.network"
