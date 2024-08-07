@@ -12,10 +12,12 @@ import {IPyth} from "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
 contract PythAggregatorV3 {
     bytes32 public priceId;
     IPyth public pyth;
+    uint64 public maxStalePeriod;
 
-    constructor(address _pyth, bytes32 _priceId) {
+    constructor(address _pyth, bytes32 _priceId, uint64 _maxStalePeriod) {
         priceId = _priceId;
         pyth = IPyth(_pyth);
+        maxStalePeriod = _maxStalePeriod;
     }
 
     function updateFeeds(bytes[] calldata priceUpdateData) public payable {
@@ -78,7 +80,10 @@ contract PythAggregatorV3 {
             uint80 answeredInRound
         )
     {
-        PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
+        PythStructs.Price memory price = pyth.getPriceNoOlderThan(
+            priceId,
+            maxStalePeriod
+        );
         return (
             _roundId,
             int256(price.price),
@@ -99,7 +104,10 @@ contract PythAggregatorV3 {
             uint80 answeredInRound
         )
     {
-        PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
+        PythStructs.Price memory price = pyth.getPriceNoOlderThan(
+            priceId,
+            maxStalePeriod
+        );
         roundId = uint80(price.publishTime);
         return (
             roundId,
